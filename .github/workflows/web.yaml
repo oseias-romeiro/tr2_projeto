@@ -18,7 +18,7 @@ jobs:
         
       - name: Deploy to FTP server
         run: |
-          lftp -c "open -u ${{ secrets.DEPLPOY_USERNAME }},${{ secrets.DEPLOY_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; mirror -R --reverse --verbose ./ ./"
+          lftp -c "open -u ${{ secrets.DEPLPOY_USERNAME }},${{ secrets.DEPLOY_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; mirror --exclude-glob '__pycache__/*' --exclude-glob 'venv/*' --exclude-glob '.gitignore' -R --reverse --verbose ./web ./web"
       
       - name: Install SSH client
         run: sudo apt-get install -y openssh-client
