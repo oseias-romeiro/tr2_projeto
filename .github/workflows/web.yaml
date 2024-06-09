@@ -18,7 +18,7 @@ jobs:
         
       - name: Deploy to FTP server
         run: |
-          lftp -c "open -u ${{ secrets.DEPLPOY_USERNAME }},${{ secrets.DEPLOY_PASSWORD }} ftp-${{ secrets.DEPLPOY_SERVER }}; set ssl:verify-certificate no; mirror -R --reverse --verbose ./ ./"
+          lftp -c "open -u ${{ secrets.DEPLPOY_USERNAME }},${{ secrets.DEPLOY_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; mirror -R --reverse --verbose ./ ./"
       
       - name: Install SSH client
         run: sudo apt-get install -y openssh-client
@@ -27,4 +27,4 @@ jobs:
         run: sudo apt-get install -y sshpass
 
       - name: Install requirements
-        run: sshpass -p ${{ secrets.DEPLOY_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USERNAME }}@ssh-${{ secrets.DEPLOY_SERVER }} 'cd tr2_projeto/web && pip install -r requirements.txt'
+        run: sshpass -p ${{ secrets.DEPLOY_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.SSH_SERVER }} 'cd tr2_projeto/web && pip install -r requirements.txt'
