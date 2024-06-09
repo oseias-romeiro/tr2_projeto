@@ -27,4 +27,4 @@ jobs:
         run: sudo apt-get install -y sshpass
 
       - name: Install requirements
-        run: sshpass -p ${{ secrets.DEPLOY_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.SSH_SERVER }} 'cd tr2_projeto/web && pip install -r requirements.txt'
+        run: sshpass -p ${{ secrets.DEPLOY_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.SSH_SERVER }} 'cd web && pip install -r requirements.txt'
