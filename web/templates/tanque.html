@@ -6,6 +6,7 @@
     <title>Tanque #{{ tanque.id }}</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
 </head>
 <body class="bg-dark">
     <div class="container-sm text-center text-light">
@@ -15,15 +16,47 @@
 
         <div class="card">
             <div class="card-body">
-                {% for d in data %}
-                <p>{{ d.nivel }}/{{ tanque.capacidade }}</p>
-                <p>{{ d.datetimestr }}</p>
-                {% if not loop.last %}<hr>{% endif %}
-                {% endfor %}
+                <div id="plotly"></div>
             </div>
         </div>
     </div>
 
+    <script>
+        let values = [
+            {% for d in data %}
+                {{ d.nivel }},
+            {% endfor %}
+        ];
+        var data = [{
+            x: [
+                {% for d in data %}
+                    '{{ d.datetimestr }}',
+                {% endfor %}
+            ],
+            y: values,
+            type: 'bar',
+            name: 'Nível',
+            marker: {
+                color: values,
+                colorscale: [
+                    [0, 'rgb(255,0,0)'],   // vermelho
+                    [1, 'rgb(0,0,255)']    // azul
+                ],
+                cmin: 0,
+                cmax: {{ tanque.capacidade }},
+                colorbar: {
+                    title: 'Nível'
+                }
+            }
+        }];
+
+        var layout = {
+            yaxis: { range: [0, {{ tanque.capacidade }}] },
+        };
+
+        Plotly.newPlot('plotly', data, layout);
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
