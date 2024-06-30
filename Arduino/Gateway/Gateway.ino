@@ -36,7 +36,7 @@ bool waitingNodeData() {
 }
 
 void sendData(){
-  Serial.println("{id: '"+ id_connected +"', distance: '" + data_recieved + "'}");
+  Serial.println("{\"id\": \"" + id_connected + "\", \"distance\": \"" + data_recieved + "\"}");
 }
 
 void setup() {
