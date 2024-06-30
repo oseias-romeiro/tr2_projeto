@@ -42,32 +42,52 @@ def index():
             SensorData.query
             .filter_by(id_tanque=t.id)
             .order_by(SensorData.datetime.desc())
-            .limit(5)
+            .limit(1)
             .all()
         )
+        # transforma datetime em string
+        for d in t.data:
+            d.datetimestr = d.datetime.strftime('%d/%m/%Y %H:%M:%S')
+            d.nivel = round(d.nivel, 2)
+            
     return render_template('index.html', tanques=tanques)
 
-@app.route('/tanque/<int:id>', methods=['POST'])
+@app.route('/tanque/<int:id>', methods=['GET', 'POST'])
 def tanque(id):
-    if(not id): return "Espera-se um id em /tanque/<id>", 304
-    try:
-        tanque = Tanque.query.get(id)
-        if not tanque:
-            tanque = Tanque(
-                id=id,
-                capacidade=float(request.form['capacidade'])
+    if request.method == 'POST':
+        if(not id): return "Espera-se um id em /tanque/<id>", 304
+        try:
+            tanque = Tanque.query.get(id)
+            if not tanque:
+                tanque = Tanque(
+                    id=id,
+                    capacidade=100.0
+                )
+                db.session.add(tanque)
+                db.session.commit()
+            sensor_data = SensorData(
+                datetime=datetime.datetime.now(),
+                nivel=100-float(request.form['distance']),
+                status="", # TODO: Implementar lógica para definir o status
+                id_tanque=id
             )
-            db.session.add(tanque)
+            db.session.add(sensor_data)
             db.session.commit()
-        sensor_data = SensorData(
-            datetime=datetime.datetime.now(),
-            nivel=float(request.form['nivel']),
-            status="", # TODO: Implementar lógica para definir o status
-            id_tanque=id
-        )
-        db.session.add(sensor_data)
-        db.session.commit()
 
-        return "Dados inseridos com sucesso", 200
-    except Exception as e:
-        return str(e), 500
+            return "Dados inseridos com sucesso", 200
+        except Exception as e:
+            return str(e), 500
+    elif request.method == 'GET':
+        tanque = Tanque.query.get(id)
+        data = (
+            SensorData.query
+            .filter_by(id_tanque=id)
+            .order_by(SensorData.datetime.desc())
+            .all()
+        )
+        # transforma datetime em string
+        for d in data:
+            d.datetimestr = d.datetime.strftime('%d/%m/%Y %H:%M:%S')
+        if not tanque:
+            return "Tanque não encontrado", 404
+        return render_template('tanque.html', tanque=tanque, data=data)

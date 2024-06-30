@@ -5,9 +5,9 @@ import json
 PORT = 'COM6'
 HOST = 'tr2.alwaysdata.net'
 
-def send_data_to_server(tank_id: str, nivel: float):
+def send_data_to_server(tank_id: str, distance: float):
     url = f"https://{HOST}/tanque/{tank_id}"  # Caminho atualizado
-    payload = {'capacidade': 100.0, 'nivel': nivel}  # Adicione a capacidade e o nível
+    payload = {'distance': distance}  # adiciona a distancia coletada
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
     try:

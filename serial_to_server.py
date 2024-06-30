@@ -6,7 +6,7 @@ import requests
 
 def send_data_to_server(tank_id, nivel):
     url = f"https://tr2.alwaysdata.net/tanque/{tank_id}"  # Caminho atualizado
-    payload = {'capacidade': 100.0, 'nivel': nivel}  # Adicione a capacidade e o nível
+    payload = {'distance': nivel}  # Adicione a capacidade e o nível
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
     try:
