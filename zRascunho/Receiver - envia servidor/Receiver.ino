@@ -8,8 +8,8 @@ const int RESET_PIN = 9;
 const int IRQ_PIN = 2;
 
 // Configurações WiFi
-const char* ssid = "SEU_SSID";
-const char* password = "SUA_SENHA";
+const char* ssid = "SSID";  // MUDAR !!!
+const char* password = "SENHA";  // MUDAR !!!
 
 // URL do servidor para onde enviar os dados
 const char* serverUrl = "http://tr2.alwaysdata.net/tanque/2";
