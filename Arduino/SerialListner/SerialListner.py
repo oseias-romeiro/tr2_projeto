@@ -1,3 +1,11 @@
+# url = "http://tr2.alwaysdata.net/tanque/2"
+# data = {'distance': 28}
+
+# response = requests.post(url, data=data)
+
+# print(f"Status Code: {response.status_code}")
+# print(f"Response: {response.text}")
+
 import serial
 import requests
 import json
