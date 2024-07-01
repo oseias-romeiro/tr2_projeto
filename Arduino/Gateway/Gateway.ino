@@ -11,7 +11,7 @@ bool waitingNodeID() {
   while (LoRa.available()) {
     id_connected += (char)LoRa.read();
   }
-  return false;
+  return false;delay(1000);
 }
 // envia sinal broadcast
 void sendBroadcastSignal() {
@@ -55,8 +55,8 @@ void loop() {
       c = 0; // reseta contador
     };
     // envia sinal de broadcast
-    sendBroadcastSignal();
     delay(1000);
+    sendBroadcastSignal();
     c++;
   }
   // sinaliza o nó e recebe os dados

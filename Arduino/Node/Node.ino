@@ -45,7 +45,6 @@ bool satabilishConnection() {
     // espera o gateway
     while (waitingGatewaySignal()){
       Serial.println("esperando o sinal do gateway");
-      delay(100);
     }
   } 
   
@@ -70,7 +69,6 @@ void loop() {
   // espera o sinal do gateway
   while (waitingGatewaySignal()){
     Serial.println("esperando o sinal do gateway");
-    delay(100);
   }
   // sinaliza que ta acordado usando o id
   // espera o gateway confirmar respondendo com o mesmo id
