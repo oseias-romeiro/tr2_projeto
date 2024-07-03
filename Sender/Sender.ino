@@ -38,5 +38,5 @@ void loop() {
   LoRa.print(distance);
   LoRa.endPacket();
 
-  delay(TIME_TO_SLEEP);
+  delay(10000);
 }
