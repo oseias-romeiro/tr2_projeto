@@ -2,6 +2,8 @@
 #include <SPI.h>
 #include <LoRa.h>
 
+// COM6 (DIREITA)
+
 #define PIN_TRIG 3
 #define PIN_ECHO 4
 #define PULSE_TIMEOUT 5000UL

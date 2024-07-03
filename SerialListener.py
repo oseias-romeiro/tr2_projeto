@@ -8,7 +8,7 @@
 
 import serial
 import requests
-import json
+
 
 # Configurações da porta serial
 port = 'COM5'
@@ -36,6 +36,4 @@ while True:
             # Supondo que o dado recebido é um número representando a distância
             data = line.split(",")
             send_data(data[0], data[1])
-        
-# Fecha a conexão serial ao finalizar o programa
-ser.close()
+            

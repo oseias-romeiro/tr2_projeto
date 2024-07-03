@@ -11,59 +11,74 @@ setlocal
 
 @rem ---------------------------------------------------------------------------------------
 
-@rem porta sender
-set SENDER_PORT=COM5
+@rem porta NODE
+set NODE_PORT=COM6
 
-@rem porta receiver
-set RECEIVER_PORT=COM6
+@rem porta GATEWAY
+set GATEWAY_PORT=COM5
 
-@rem caminho Sender
-set SENDER_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Sender\Sender.ino"
+@rem caminho NODE
+set NODE_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Node\Node.ino"
 
-@rem caminho Receiver
-set RECEIVER_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Receiver\Receiver.ino"
+@rem caminho GATEWAY
+set GATEWAY_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Gateway\Gateway.ino"
 
 @rem ---------------------------------------------------------------------------------------
 
+echo ---------------------------------------------------------------------------------------
+echo  NODE 
+echo ---------------------------------------------------------------------------------------
 echo.
+
 echo  -----------
 echo  - COMPILE -
 echo  -----------
 echo.
 
-@rem compile e upload do Sender
-arduino-cli compile --fqbn arduino:avr:uno %SENDER_PATH%
+@rem compile e upload do NODE
+arduino-cli compile --fqbn arduino:avr:uno %NODE_PATH%
 
-echo. 
-echo ---------------------------------------------------------------------------------------
 echo. 
 echo  ----------
 echo  - UPLOAD -
 echo  ----------
 echo. 
 
-arduino-cli upload -p %SENDER_PORT% --fqbn arduino:avr:uno %SENDER_PATH%
+arduino-cli upload -p %NODE_PORT% --fqbn arduino:avr:uno %NODE_PATH%
 
 echo.
 echo ---------------------------------------------------------------------------------------
+echo  GATEWAY
 echo ---------------------------------------------------------------------------------------
+
 echo.
 echo  -----------
 echo  - COMPILE -
 echo  -----------
 echo.
 
-arduino-cli compile --fqbn arduino:avr:uno %RECEIVER_PATH%
+arduino-cli compile --fqbn arduino:avr:uno %GATEWAY_PATH%
 
 echo.
-echo ---------------------------------------------------------------------------------------
-echo. 
 echo  ----------
 echo  - UPLOAD -
 echo  ----------
 echo.
 
-arduino-cli upload -p %RECEIVER_PORT% --fqbn arduino:avr:uno %RECEIVER_PATH%
+arduino-cli upload -p %GATEWAY_PORT% --fqbn arduino:avr:uno %GATEWAY_PATH%
+
+echo.
+echo ---------------------------------------------------------------------------------------
+echo  SERIAL LISTENER
+echo ---------------------------------------------------------------------------------------
+echo.
+
+start cmd /k arduino-cli monitor -p %NODE_PORT%
+python SerialListener.py
+
+echo.
+echo ---------------------------------------------------------------------------------------
+echo. 
 
 endlocal
 pause >nul

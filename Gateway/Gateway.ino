@@ -1,6 +1,8 @@
 #include <SPI.h>
 #include <LoRa.h>
 
+// COM5 (ESQUERDA)
+
 String id_connected = "";
 String data_received = "";
 bool debug = false;
