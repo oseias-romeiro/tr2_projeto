@@ -8,22 +8,23 @@
 
 import serial
 import requests
+import json
 
 # Configurações da porta serial
-port = 'COM6'
+port = 'COM5'
 baudrate = 9600
 timeout = 1
 
 # URL para enviar os dados
-url = "http://tr2.alwaysdata.net/tanque/2"
+url = "http://tr2.alwaysdata.net/tanque/"
 
 # Inicializa a conexão serial
 ser = serial.Serial(port, baudrate, timeout=timeout)
 
 # Função para enviar dados via POST request
-def send_data(distance):
+def send_data(id, distance):
     data = {'distance': distance}
-    response = requests.post(url, data=data)
+    response = requests.post(url+id, data=data)
     print(f"Status Code: {response.status_code}")
     print(f"Response: {response.text}")
 
@@ -33,11 +34,8 @@ while True:
         if line:
             print(f"Received from serial: {line}")
             # Supondo que o dado recebido é um número representando a distância
-            try:
-                distance = int(line)
-                send_data(distance)
-            except ValueError:
-                print(f"Invalid data: {line}")
-
+            data = line.split(",")
+            send_data(data[0], data[1])
+        
 # Fecha a conexão serial ao finalizar o programa
 ser.close()

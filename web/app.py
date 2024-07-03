@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import os, datetime
+import os
+from datetime import datetime, timedelta, timezone
 
 DB_URI = os.getenv('DB_URI', 'sqlite:///db.sqlite3')
 
@@ -66,7 +67,7 @@ def tanque(id):
                 db.session.add(tanque)
                 db.session.commit()
             sensor_data = SensorData(
-                datetime=datetime.datetime.now(),
+                datetime=datetime.now(timezone(timedelta(hours=-5))),
                 nivel=100-float(request.form['distance']),
                 status="", # TODO: Implementar lógica para definir o status
                 id_tanque=id

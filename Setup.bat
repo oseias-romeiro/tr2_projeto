@@ -11,25 +11,59 @@ setlocal
 
 @rem ---------------------------------------------------------------------------------------
 
-@rem porta
-set PORT=COM4
+@rem porta sender
+set SENDER_PORT=COM5
+
+@rem porta receiver
+set RECEIVER_PORT=COM6
 
 @rem caminho Sender
 set SENDER_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Sender\Sender.ino"
 
-@caminho Receiver
+@rem caminho Receiver
 set RECEIVER_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Receiver\Receiver.ino"
 
 @rem ---------------------------------------------------------------------------------------
 
+echo.
+echo  -----------
+echo  - COMPILE -
+echo  -----------
+echo.
 
 @rem compile e upload do Sender
 arduino-cli compile --fqbn arduino:avr:uno %SENDER_PATH%
-arduino-cli upload -p %PORT% --fqbn arduino:avr:uno %SENDER_PATH%
 
-@rem compile e faça o upload do Receiver
+echo. 
+echo ---------------------------------------------------------------------------------------
+echo. 
+echo  ----------
+echo  - UPLOAD -
+echo  ----------
+echo. 
+
+arduino-cli upload -p %SENDER_PORT% --fqbn arduino:avr:uno %SENDER_PATH%
+
+echo.
+echo ---------------------------------------------------------------------------------------
+echo ---------------------------------------------------------------------------------------
+echo.
+echo  -----------
+echo  - COMPILE -
+echo  -----------
+echo.
+
 arduino-cli compile --fqbn arduino:avr:uno %RECEIVER_PATH%
-arduino-cli upload -p %PORT% --fqbn arduino:avr:uno %RECEIVER_PATH%
+
+echo.
+echo ---------------------------------------------------------------------------------------
+echo. 
+echo  ----------
+echo  - UPLOAD -
+echo  ----------
+echo.
+
+arduino-cli upload -p %RECEIVER_PORT% --fqbn arduino:avr:uno %RECEIVER_PATH%
 
 endlocal
 pause >nul
