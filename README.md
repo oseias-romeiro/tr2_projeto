@@ -8,6 +8,7 @@ arduino-cli lib install "Ultrasonic"
 pip install pyserial
 pip install requests
 ```
+
 ## Setup
 Para rodar todo o projeto, deve-se usar os seguintes comandos no terminal (Windows):
 ```
