@@ -3,9 +3,9 @@
 #include "Ultrasonic.h"
 
 // Pinos e configuração do Ultrassom
-#define TRIGGER_PIN 3;
-#define ECHO_PIN 4;
-#define PULSE_TIMEOUT 5000UL;
+#define TRIGGER_PIN 3
+#define ECHO_PIN 4
+#define PULSE_TIMEOUT 5000UL
 
 Ultrasonic ultrasonic(TRIGGER_PIN, ECHO_PIN, PULSE_TIMEOUT);
 int distance;
