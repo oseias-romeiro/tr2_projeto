@@ -35,10 +35,8 @@ void loop() {
   Serial.println(distance);
 
   LoRa.beginPacket();
-  LoRa.print("Distance: ");
   LoRa.print(distance);
-  LoRa.print(" cm");
   LoRa.endPacket();
 
-  delay(100);
+  delay(TIME_TO_SLEEP);
 }
