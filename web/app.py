@@ -47,7 +47,7 @@ def index():
         )
         # transforma datetime em string
         for d in t.data:
-            d.datetimestr = d.datetime.strftime('%d/%m/%Y %H:%M:%S')
+            d.datetimestr = d.datetime.strftime('%d/%m %H:%M:%S')
             d.nivel = round(d.nivel, 2)
             
     return render_template('index.html', tanques=tanques)
@@ -98,7 +98,7 @@ def tanque(id):
             tanque.tempo = 0
         # transforma datetime em string
         for d in data:
-            d.datetimestr = d.datetime.strftime('%d/%m/%Y %H:%M:%S')
+            d.datetimestr = d.datetime.strftime('%d/%m %H:%M:%S')
         if not tanque:
             return "Tanque não encontrado", 404
         return render_template('tanque.html', tanque=tanque, data=data)
