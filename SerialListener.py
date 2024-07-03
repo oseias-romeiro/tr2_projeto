@@ -6,8 +6,8 @@
 # print(f"Status Code: {response.status_code}")
 # print(f"Response: {response.text}")
 
-import serial
-import requests
+import serial # pip install pyserial
+import requests # pip install requests
 
 
 # Configurações da porta serial
