@@ -92,7 +92,7 @@ def tanque(id):
         else:
             tanque.variacao = 0
         # tempo estimado de vida
-        if data:
+        if data and tanque.variacao > 0:
             tanque.tempo = round(data[-1].nivel / tanque.variacao, 2)
         else:
             tanque.tempo = 0
