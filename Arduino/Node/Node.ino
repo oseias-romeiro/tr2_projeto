@@ -4,60 +4,49 @@
 
 #define PIN_TRIG 3
 #define PIN_ECHO 4
+#define PULSE_TIMEOUT 5000UL
 
-Ultrasonic ultrasonic(PIN_TRIG, PIN_ECHO);
+Ultrasonic ultrasonic(PIN_TRIG, PIN_ECHO, PULSE_TIMEOUT);
 const String TANQUE_ID = "1001";
 
-// retorna falso ao receber sinal do gateway
+// Retorna true quando receber sinal do gateway
 bool waitingGatewaySignal() {
   int packetSize = LoRa.parsePacket();
-  if (!packetSize) return true;
-  else return false;
+  if (!packetSize) return true;  // Nenhum pacote disponível
+  return false;
 }
 
-// evnia o id como sinal de que está acordado
-void sendSignal(){
-  Serial.println("Enviando ID para o gateway");
+// Envia o ID como sinal de que está acordado
+void sendSignal() {
   LoRa.beginPacket();
   LoRa.print(TANQUE_ID);
   LoRa.endPacket();
-  Serial.println(TANQUE_ID);
 }
 
-//retorna true quando o gateway retornar um sinal igual a TANQUE_ID
-bool satabilishConnection() {
-  // obtem a resposta do gateway
+// Retorna true quando o gateway confirmar o ID
+bool establishConnection() {
   int packetSize = LoRa.parsePacket();
-  if(!packetSize) return false;
+  if (!packetSize) return false; // Nenhum pacote disponível
   String resposta = "";
   while (LoRa.available()) {
     resposta += (char)LoRa.read();
   }
-  // verifica se o gateway confirmou o id
-  if(TANQUE_ID == resposta){
-    Serial.println("gateway confirmou me enviando meu id");
+  if (resposta.equals(TANQUE_ID)) {
+    Serial.println("Gateway confirmou o ID: " + resposta);
     return true;
   }else {
-    // espera a vez de outro
-    // 3000 seria um tempo suficiente para o outro comunicar
-    // mas nao longo o suficiente para causar um starvation
-    delay(3000);
-    // espera o gateway
-    while (waitingGatewaySignal()){
-      Serial.println("esperando o sinal do gateway");
-      delay(100);
-    }
-  } 
-  
+    Serial.println("não é minha vez");
+    delay(10000); // Aguarda 10 segundos antes de tentar novamente
+    return false;
+  }
 }
 
-// envia a distancia para o gateway
-void sendDistance(long distance){
+// Envia a distância medida para o gateway
+void sendDistance(long distance) {
   LoRa.beginPacket();
   LoRa.print(String(distance));
   LoRa.endPacket();
-  Serial.println("Dado enviado:");
-  Serial.println(distance);
+  Serial.println("Enviado dado: " + String(distance));
 }
 
 void setup() {
@@ -66,19 +55,36 @@ void setup() {
 }
 
 void loop() {
-
-  // espera o sinal do gateway
-  while (waitingGatewaySignal()){
-    Serial.println("esperando o sinal do gateway");
-    delay(100);
+  // Aguarda sinal do gateway
+  while (waitingGatewaySignal()) {
+    Serial.println("Aguardando sinal do gateway...");
   }
-  // sinaliza que ta acordado usando o id
-  // espera o gateway confirmar respondendo com o mesmo id
-  while (!satabilishConnection()){ sendSignal(); }
-  // faz a medição
+  delay(2000);
+  // Aguarda confirmação de conexão pelo gateway
+  while(true) {
+    sendSignal();
+    Serial.println("Enviado ID para o gateway: " + TANQUE_ID);
+    // Espera a resposta do gateway
+    int timeout = 10000; // Tempo máximo de espera (10 segundos)
+    unsigned long start = millis();
+    bool ok = false;
+    while (millis() - start < timeout) {
+      if(establishConnection()){
+        ok = true;
+        break;
+      }
+    }
+    if(ok) break;
+    else Serial.println("Falha, tentando novamente...");
+  }
+  delay(2000);
+  // Realiza a medição
   long distance = ultrasonic.read();
-  // envia o dado
+
+  // Envia a distância medida para o gateway
   sendDistance(distance);
-  // dorme por 10 segundos
-  delay(10000);
+
+  // Dorme por 30 segundos antes de repetir o ciclo
+  Serial.println("Dormindo...");
+  delay(30000);
 }
