@@ -82,9 +82,20 @@ def tanque(id):
         data = (
             SensorData.query
             .filter_by(id_tanque=id)
-            .order_by(SensorData.datetime.desc())
+            .order_by(SensorData.datetime.asc())
             .all()
         )
+        # variação da última hora
+        niveis1h = [d.nivel for d in data if (datetime.datetime.now() - d.datetime).total_seconds() < 3600]
+        if niveis1h:
+            tanque.variacao = round(max(niveis1h) - min(niveis1h), 2)
+        else:
+            tanque.variacao = 0
+        # tempo estimado de vida
+        if data:
+            tanque.tempo = round(data[-1].nivel / tanque.variacao, 2)
+        else:
+            tanque.tempo = 0
         # transforma datetime em string
         for d in data:
             d.datetimestr = d.datetime.strftime('%d/%m/%Y %H:%M:%S')

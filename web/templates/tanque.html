@@ -14,7 +14,16 @@
             Tanque #{{ tanque.id }}<hr>
         </h1>
 
-        <div class="card">
+        <div class="list-group list-group-flush mx-auto mb-5" style="max-width: 200px;">
+            <div class="list-group-item">
+                Consumo: {{ tanque.variacao }}/h
+            </div>
+            <div class="list-group-item">
+                Vida: {{ tanque.tempo }} horas
+            </div>
+        </div>
+
+        <div class="card mb-5">
             <div class="card-body">
                 <div id="plotly"></div>
             </div>
@@ -34,7 +43,7 @@
                 {% endfor %}
             ],
             y: values,
-            type: 'bar',
+            type: 'line',
             name: 'Nível',
             marker: {
                 color: values,
