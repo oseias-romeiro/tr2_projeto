@@ -1,17 +1,20 @@
 # Projeto de TR2
 Projeto de Teleinformática de Redes 2 para controle de nível combustiveis em tanque de armazenamento
 
-## Setup
-Para rodar todo o projeto, deve-se usar os seguintes comandos no terminal (Windows):
+## Requisitos 
 ```
 arduino-cli lib install "LoRa"
 arduino-cli lib install "Ultrasonic"
+pip install pyserial
+pip install requests
+```
+## Setup
+Para rodar todo o projeto, deve-se usar os seguintes comandos no terminal (Windows):
+```
 Setup.bat
 ```
 OU
 ```
-arduino-cli lib install "LoRa"
-arduino-cli lib install "Ultrasonic"
 arduino-cli compile --fqbn arduino:avr:uno "%~dp0\Node\Node.ino"
 arduino-cli upload -p <porta_usb_arduino_node> --fqbn arduino:avr:uno "%~dp0\Node\Node.ino"
 arduino-cli compile --fqbn arduino:avr:uno "%~dp0\Gateway\Gateway.ino"
