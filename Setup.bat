@@ -18,10 +18,10 @@ set NODE_PORT=COM6
 set GATEWAY_PORT=COM5
 
 @rem caminho NODE
-set NODE_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Node\Node.ino"
+set NODE_PATH="%~dp0\Node\Node.ino"
 
 @rem caminho GATEWAY
-set GATEWAY_PATH="D:\OneDrive - unb.br\[Matérias]\TR2\Projeto Final\tr2_projeto\Gateway\Gateway.ino"
+set GATEWAY_PATH="%~dp0\Gateway\Gateway.ino"
 
 @rem ---------------------------------------------------------------------------------------
 
