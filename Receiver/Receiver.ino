@@ -1,11 +1,10 @@
 #include <LoRa.h>
 
-#define ID_CONNECTED 1
-
 // Pinos e configuração do LoRa
 const int CS_PIN = 10;
 const int RESET_PIN = 9;
 const int IRQ_PIN = 2;
+const int ID_CONNECTED = 1;
 
 unsigned long int timeToSleep = 1;
 unsigned long int timeToWait = 1;
@@ -43,7 +42,7 @@ int Sync(){
     
     Serial.println("Aguardando segundo pacote.");
     while (!receivedData) {
-      receivedData = ReceiveData();;
+      receivedData = ReceiveData();
       delay(1000);
     }
 
@@ -80,7 +79,7 @@ void loop() {
 
     if (!receivedData) {
       Serial.print("Não foi recebido nenhum pacote no tempo de ");
-      Serial.print(packetTime);
+      Serial.print(timeToSleep);
       Serial.println(" estipulado. Sincronização será realizada novamente.");
 
       synced = false;
@@ -92,7 +91,7 @@ void loop() {
 }
 
 void SendDataToSerial(String distance){
-  Serial.println("{\"id\": \"" + ID_CONNECTED + "\", \"distance\": \"" + distance + "\"}");
+  Serial.println("{\"id\": \"" + String(ID_CONNECTED) + "\", \"distance\": \"" + distance + "\"}");
 }
 
 String ReceiveData() {
