@@ -1,0 +1,9 @@
+[2024-07-04 20:48:09]
+{"id": "", "distance": ""}
+teste1
+teste2
+[2024-07-04 20:48:34]
+{"id": "", "distance": ""}
+teste1
+teste2
+

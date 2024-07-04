@@ -1,6 +1,7 @@
 #include <Ultrasonic.h>
 #include <SPI.h>
 #include <LoRa.h>
+#include <Sleep_n0m1.h>
 
 // COM6 (DIREITA)
 
@@ -8,14 +9,25 @@
 #define PIN_ECHO 4
 #define PULSE_TIMEOUT 5000UL
 
+Sleep sp;
 Ultrasonic ultrasonic(PIN_TRIG, PIN_ECHO, PULSE_TIMEOUT);
+const int SLEEP_TIME = 30000; // 30 segundos
 const String TANQUE_ID = "1001";
 
-// Retorna true quando receber sinal do gateway
+// Retorna false quando receber sinal do gateway
 bool waitingGatewaySignal() {
   int packetSize = LoRa.parsePacket();
-  if (!packetSize) return true;  // Nenhum pacote disponível
-  return false;
+  if (packetSize) {
+    String signal = "";
+    while (LoRa.available()) {
+      signal += (char)LoRa.read();
+    }
+    if (signal.equals("broadcast")) {
+      Serial.println("Recebi sinal do gateway");
+      return false;
+    }
+  }
+  return true;
 }
 
 // Envia o ID como sinal de que está acordado
@@ -88,5 +100,6 @@ void loop() {
 
   // Dorme por 30 segundos antes de repetir o ciclo
   Serial.println("Dormindo...");
-  delay(30000);
+  sp.pwrDownMode();
+  sp.sleepDelay(SLEEP_TIME);
 }

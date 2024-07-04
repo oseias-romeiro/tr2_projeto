@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
+from collections import deque
 
 DB_URI = os.getenv('DB_URI', 'sqlite:///db.sqlite3')
 
@@ -16,7 +17,8 @@ migrate = Migrate(app, db)
 class Tanque(db.Model):
     __tablename__ = 'tanque'
     id = db.Column(db.Integer, primary_key=True)
-    capacidade = db.Column(db.Float, nullable=False)
+    capacidade = db.Column(db.Float, nullable=False, default=100.0)
+    descricao = db.Column(db.String(100), nullable=True)
 
     def __repr__(self):
         return f'<Tanque {self.nome}>'
@@ -60,14 +62,11 @@ def tanque(id):
         try:
             tanque = Tanque.query.get(id)
             if not tanque:
-                tanque = Tanque(
-                    id=id,
-                    capacidade=100.0
-                )
+                tanque = Tanque(id=id)
                 db.session.add(tanque)
                 db.session.commit()
             sensor_data = SensorData(
-                datetime=datetime.now(timezone(timedelta(hours=-5))),
+                datetime=datetime.strptime(request.form['datetime'], '%Y-%m-%d %H:%M:%S'),
                 nivel=100-float(request.form['distance']),
                 status="", # TODO: Implementar lógica para definir o status
                 id_tanque=id
@@ -77,6 +76,7 @@ def tanque(id):
 
             return "Dados inseridos com sucesso", 200
         except Exception as e:
+            print(str(e))
             return str(e), 500
     elif request.method == 'GET':
         tanque = Tanque.query.get(id)
@@ -87,7 +87,7 @@ def tanque(id):
             .all()
         )
         # variação da última hora
-        niveis1h = [d.nivel for d in data if (datetime.datetime.now() - d.datetime).total_seconds() < 3600]
+        niveis1h = [d.nivel for d in data if (datetime.now() - d.datetime).total_seconds() < 3600]
         if niveis1h:
             tanque.variacao = round(max(niveis1h) - min(niveis1h), 2)
         else:
@@ -103,3 +103,44 @@ def tanque(id):
         if not tanque:
             return "Tanque não encontrado", 404
         return render_template('tanque.html', tanque=tanque, data=data)
+
+@app.route('/tanque/logs', methods=['GET', 'POST'])
+def tanqueLogs():
+    if request.method == 'POST':
+        try:
+            logs = request.form['logs']
+            data = request.form['data']
+            date = request.form['datetime']
+            f = open(f'logs.txt', 'a+', encoding='utf-8')
+            f.write(f"[{date}]\n{data}\n")
+            for l in logs.split('\n'): f.write(f"{l}\n")
+            f.close()
+            return "Logs inseridos com sucesso", 200
+        except Exception as e:
+            print(str(e))
+            return str(e), 500
+    elif request.method == 'GET':
+        f = open(f'logs.txt', 'r', encoding='utf-8')
+        logs = deque(f.readlines(), maxlen=1000)
+        f.close()
+        return render_template('logs.html', logs=logs)
+
+@app.route('/tanque/<int:id>/edit', methods=['GET', 'POST'])
+def editTanque(id):
+    if request.method == 'POST':
+        if(not id):
+            return "Espera-se um id em /tanque/<id>/edit", 304
+        try:
+            tanque = Tanque.query.get(id)
+            if not tanque:
+                return "Tanque não encontrado", 404
+            tanque.capacidade = float(request.form['capacidade'])
+            tanque.descricao = request.form['descricao']
+            db.session.commit()
+            return "Tanque editado com sucesso", 200
+        except Exception as e:
+            return str(e), 500
+    
+    elif request.method == 'GET':
+        tanque = Tanque.query.get(id)
+        return render_template('edit_tanque.html', tanque=tanque)

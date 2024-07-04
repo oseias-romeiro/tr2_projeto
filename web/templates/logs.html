@@ -3,36 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoramento de tanques</title>
+    <title>Logs</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body class="bg-dark">
     <div class="container-sm text-center text-light">
         <h1 class="m-5">
-            Monitoramento de tanques de combustíveis
+            Logs
             <hr>
         </h1>
-
-        <a href="/tanque/logs">logs</a><br><br>
         
-        {% if tanques|length > 0 %}
-        {% for t in tanques %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title mb-4">
-                    Tanque <a href="/tanque/{{ t.id }}">#{{ t.id }}</a>
-                </h5>
-                <div>
-                    <p>Capacidade = {{ t.capacidade }}</p>
-                    <p>{{ t.descricao }}</p>                    
-                </div>
-            </div>
-        </div>
-        <br>
-        {% endfor %}
+        {% if logs|length > 0 %}
+        <pre class="text-start bg-light text-dark p-2">{% for log in logs %}{{ log }}{% endfor %}</pre>
         {% else %}
-        <h3 class="mt-4">Nenhum tanque cadastrado!</h3>
+        <h3 class="mt-4">Nenhum log registrado ainda!</h3>
         {% endif %}
     </div>
 
