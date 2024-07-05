@@ -136,6 +136,13 @@ void loop() {
     }else {
       if(debug) Serial.println("Falha na conexão com o nó "+id_connected);
       logs += "Desconectando do nó " + id_connected + "\n";
+
+      // Envia dados via serial
+      sendData(logs);
+
+      // Limpa variáveis para o próximo ciclo
+      id_connected = "";
+      data_received = "";
     }
   }else {
     if(debug) Serial.println("Dormindo...");
