@@ -12,7 +12,7 @@ import json
 from datetime import datetime
 
 # Configurações da porta serial
-port = '/dev/ttyACM0'# COM5
+port = 'COM5'
 baudrate = 9600
 timeout = 1
 
