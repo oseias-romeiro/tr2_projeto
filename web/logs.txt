@@ -1,0 +1,146 @@
+[2024-07-05 13:34:14]
+{"id": "1001", "nivel": "3", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 2\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 3\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 2
+Conectando com o nó 1001
+Dados recebidos do nó: 3
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:34:51]
+{"id": "1001", "nivel": "3", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 3\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 3
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:35:28]
+{"id": "1001", "nivel": "3", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 3\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 3
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:36:04]
+{"id": "1001", "nivel": "74", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 74\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 74
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:36:41]
+{"id": "1001", "nivel": "55", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 55\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 55
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:37:18]
+{"id": "1001", "nivel": "70", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 70\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 70
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:37:54]
+{"id": "1001", "nivel": "73", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 73\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 73
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:38:31]
+{"id": "1001", "nivel": "61", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 61\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 61
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:39:08]
+{"id": "1001", "nivel": "38", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 38\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 38
+Tentativa 1
+Dormindo...
+ 
+[2024-07-05 13:39:44]
+{"id": "1001", "nivel": "18", "logs": "Enviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nEnviado sinal de broadcast\nId recebido: 1001\nTentativa 6\nConectando com o n\u00f3 1001\nDados recebidos do n\u00f3: 18\nTentativa 1\nDormindo...\n "}
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Enviado sinal de broadcast
+Id recebido: 1001
+Tentativa 6
+Conectando com o nó 1001
+Dados recebidos do nó: 18
+Tentativa 1
+Dormindo...
+ 

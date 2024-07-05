@@ -46,7 +46,7 @@ bool waitingNodeData() {
 
 // Envia dados recebidos via serial
 void sendData(String logs) {
-  Serial.println("{\"id\":\"" + id_connected + "\",\"nivel\":\"" + data_received + "\",\"logs\":\"" + logs + "\"}");
+  Serial.println("{\"id\":\"" + id_connected + "\",\"nivel\":\"" + data_received + "\",\"logs\":\"" + logs + "\ \"}");
 }
 
 void setup() {
@@ -62,7 +62,7 @@ void loop() {
   int c = 0;
   while(true){
     if(debug) Serial.println("Enviado sinal de broadcast");
-    logs += "Enviado sinal de broadcast\n";
+    logs += "Enviado sinal de broadcast\\n";
     sendBroadcastSignal();
     delay(1000);
     // Espera a resposta de um nó
@@ -73,17 +73,17 @@ void loop() {
       if(!waitingNodeID()){
         ok = true;
         if(debug) Serial.println("Id recebido: " + id_connected);
-        logs += "Id recebido: " + id_connected + "\n";
-        logs += "Tentativa " + String(c+1) + "\n";
+        logs += "Id recebido: " + id_connected + "\\n";
+        logs += "Tentativa " + String(c+1) + "\\n";
         break;
       };
     }
     if(ok) break;
     c++;
     // 3 tentativas para receber o ID
-    if(c > 3) {
+    if(c > 5) {
       deadNodes = true;
-      logs += "! nós não respondem !\n";
+      logs += "! nós não respondem !\\n";
       break;
     }
   }
@@ -94,7 +94,7 @@ void loop() {
     bool connectionFailed = false;
     while (true) {
       if(debug) Serial.println("Conectando com o nó " + id_connected);
-      logs += "Conectando com o nó " + id_connected + "\n";
+      logs += "Conectando com o nó " + id_connected + "\\n";
       establishConnection();
       delay(1000);
       // Aguarda os dados do nó
@@ -105,25 +105,25 @@ void loop() {
         if(!waitingNodeData()) {
           ok = true;
           if(debug) Serial.println("Dados recebidos do nó: " + data_received);
-          logs += "Dados recebidos do nó: " + data_received + "\n";
-          logs += "Tentativa " + String(c+1) + "\n";
+          logs += "Dados recebidos do nó: " + data_received + "\\n";
+          logs += "Tentativa " + String(c+1) + "\\n";
           break;
         }
       }
       if(ok) break;
       if(debug) Serial.println("Falha, tentando novamente...");
-      logs += "Falha, tentando novamente...\n";
+      logs += "Falha, tentando novamente...\\n";
       c++;
       // 3 tentativas para receber os dados
       if(c > 3) {
         connectionFailed = true;
-        logs += "! nó não devolveu os dados !\n";
+        logs += "! nó não devolveu os dados !\\n";
         break;
       }
     }
     if(!connectionFailed) {
       // Envia dados via serial
-      logs += "Dormindo...\n";
+      logs += "Dormindo...\\n";
       sendData(logs);
 
       // Limpa variáveis para o próximo ciclo
@@ -135,7 +135,7 @@ void loop() {
       sp.sleepDelay(SLEEP_TIME);
     }else {
       if(debug) Serial.println("Falha na conexão com o nó "+id_connected);
-      logs += "Desconectando do nó " + id_connected + "\n";
+      logs += "Desconectando do nó " + id_connected + "\\n";
 
       // Envia dados via serial
       sendData(logs);
@@ -146,7 +146,7 @@ void loop() {
     }
   }else {
     if(debug) Serial.println("Dormindo...");
-    logs += "Dormindo...\n";
+    logs += "Dormindo...\\n";
 
     // Envia dados via serial
     sendData(logs);

@@ -105,8 +105,8 @@ def tanque(id):
             return "Tanque não encontrado", 404
         return render_template('tanque.html', tanque=tanque, data=data)
 
-@app.route('/tanque/logs', methods=['GET', 'POST'])
-def tanqueLogs():
+@app.route('/gateway/logs', methods=['GET', 'POST', 'DELETE'])
+def gatewayLogs():
     if request.method == 'POST':
         try:
             logs = request.form['logs']
@@ -125,6 +125,11 @@ def tanqueLogs():
         logs = deque(f.readlines(), maxlen=1000)
         f.close()
         return render_template('logs.html', logs=logs)
+    elif request.method == 'DELETE':
+        f = open(f'logs.txt', 'w', encoding='utf-8')
+        f.write('')
+        f.close()
+        return "Logs apagados com sucesso", 200
 
 @app.route('/tanque/<int:id>/edit', methods=['GET', 'POST'])
 def editTanque(id):
