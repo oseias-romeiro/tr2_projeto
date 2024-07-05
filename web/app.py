@@ -114,7 +114,7 @@ def gatewayLogs():
             date = request.form['datetime']
             f = open(f'logs.txt', 'a+', encoding='utf-8')
             f.write(f"[{date}]\n{data}\n")
-            for l in logs.split('\n'): f.write(f"{l}\n")
+            for l in logs.split('\\n'): f.write(f"{l}\n")
             f.close()
             return "Logs inseridos com sucesso", 200
         except Exception as e:

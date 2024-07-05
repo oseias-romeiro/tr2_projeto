@@ -15,6 +15,7 @@
         </h1>
 
         <button onclick="deleteLogs()" class="btn btn-danger">Delete</button>
+        <br><br>
         
         {% if logs|length > 0 %}
         <pre class="text-start bg-light text-dark p-2">{% for log in logs %}{{ log }}{% endfor %}</pre>
