@@ -14,6 +14,10 @@
             Tanque #{{ tanque.id }}<hr>
         </h1>
 
+        <a href="/tanque/{{ tanque.id }}/edit">
+            <button class="btn btn-secondary">Editar</button>
+        </a><br><br>
+
         <div class="list-group list-group-flush mx-auto mb-5" style="max-width: 200px;">
             <div class="list-group-item">
                 Consumo: {{ tanque.variacao }}/h

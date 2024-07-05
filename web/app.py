@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
@@ -53,7 +53,8 @@ def index():
             d.datetimestr = d.datetime.strftime('%d/%m %H:%M:%S')
             d.nivel = round(d.nivel, 2)
             
-    return render_template('index.html', tanques=tanques)
+    msg = request.cookies.get('msg', '')
+    return render_template('index.html', tanques=tanques, msg=msg)
 
 @app.route('/tanque/<int:id>', methods=['GET', 'POST'])
 def tanque(id):
@@ -137,9 +138,10 @@ def editTanque(id):
             tanque.capacidade = float(request.form['capacidade'])
             tanque.descricao = request.form['descricao']
             db.session.commit()
-            return "Tanque editado com sucesso", 200
+            
+            return render_template('msg.html', msg="Tanque editado com sucesso")
         except Exception as e:
-            return str(e), 500
+            return render_template('msg.html', msg=str(e)), 500
     
     elif request.method == 'GET':
         tanque = Tanque.query.get(id)
