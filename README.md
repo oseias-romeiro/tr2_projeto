@@ -5,6 +5,7 @@ Projeto de Teleinformática de Redes 2 para controle de nível combustiveis em t
 ```
 arduino-cli lib install "LoRa"
 arduino-cli lib install "Ultrasonic"
+arduino-cli lib install "Sleep_n0m1"
 pip install pyserial
 pip install requests
 ```
