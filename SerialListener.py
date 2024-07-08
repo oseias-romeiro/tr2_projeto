@@ -6,13 +6,17 @@
 # print(f"Status Code: {response.status_code}")
 # print(f"Response: {response.text}")
 
+import sys
 import serial # pip install pyserial
 import requests # pip install requests
 import json
 from datetime import datetime
 
 # Configurações da porta serial
-port = 'COM5'
+if len(sys.argv) != 2:
+    port = input("Digite a porta do Gateway (exemplo: COM5): ")
+else:
+    port = sys.argv[1]
 baudrate = 9600
 timeout = 1
 

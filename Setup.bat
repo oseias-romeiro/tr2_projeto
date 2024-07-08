@@ -3,19 +3,24 @@
 color a
 setlocal
 
+@rem - Requisitos de instalação:
 @rem arduino-cli lib install "LoRa"
 @rem arduino-cli lib install "Ultrasonic"
-@rem arduino-cli compile --fqbn arduino:avr:uno <caminho>
-@rem arduino-cli board list
-@rem arduino-cli upload -p <porta> --fqbn arduino:avr:uno <caminho>
+@rem arduino-cli lib install "Sleep_n0m1"
 
 @rem ---------------------------------------------------------------------------------------
 
-@rem porta NODE
-set NODE_PORT=COM6
+echo. 
+echo #----------------#
+echo # Portas Serial: #
+echo #----------------#
+arduino-cli board list
 
-@rem porta GATEWAY
-set GATEWAY_PORT=COM5
+@rem Solicita a porta NODE ao usuário
+set /p NODE_PORT=Digite a porta do Node (exemplo: COM6): 
+
+@rem Solicita a porta GATEWAY ao usuário
+set /p GATEWAY_PORT=Digite a porta Gateway (exemplo: COM5): 
 
 @rem caminho NODE
 set NODE_PATH="%~dp0\Node\Node.ino"
@@ -24,6 +29,7 @@ set NODE_PATH="%~dp0\Node\Node.ino"
 set GATEWAY_PATH="%~dp0\Gateway\Gateway.ino"
 
 @rem ---------------------------------------------------------------------------------------
+echo.
 
 echo ---------------------------------------------------------------------------------------
 echo  NODE 
@@ -73,8 +79,9 @@ echo  SERIAL LISTENER
 echo ---------------------------------------------------------------------------------------
 echo.
 
-start cmd /k arduino-cli monitor -p %NODE_PORT%
-python SerialListener.py
+start cmd /k "echo -- Node -- & echo. & arduino-cli monitor -p %NODE_PORT%"
+echo -- Gateway -- & echo.
+python SerialListener.py %GATEWAY_PORT%
 
 echo.
 echo ---------------------------------------------------------------------------------------
