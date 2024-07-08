@@ -6,7 +6,7 @@ Projeto de criação e implementação de um sistema de monitoramento remoto do 
   - Paulo Victor França de Souza - 200042548
 
 ## Demonstração:
-  - https://youtu.be/Vv9kiqzvt7s
+Video demonstrativo em ambiente de teste: [youtu.be/Vv9kiqzvt7s](https://youtu.be/Vv9kiqzvt7s)
 
 ## Setup 
 Para rodar o projeto, deve-se instalar os seguintes requisitos:
