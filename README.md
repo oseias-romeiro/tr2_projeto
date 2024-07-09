@@ -1,39 +1,42 @@
 # Projeto Final de TR2 - Monitoramento Remoto de Tanques de Combustível
 Projeto de criação e implementação de um sistema de monitoramento remoto do nível de tanques de combustível utilizando comunicação LoRa e dispositivos Arduino para a disciplina de Teleinformática e Redes 2 na Universidade de Brasília (UnB) em 2024 (2024.1).
 
-  - Felipe Fontenele dos Santos -  190027622
-  - Oseias Romeiro Magalhães - 211036123
-  - Paulo Victor França de Souza - 200042548
+- Felipe Fontenele dos Santos -  190027622
+- Oseias Romeiro Magalhães - 211036123
+- Paulo Victor França de Souza - 200042548
 
 > Repositório GitHub: [oseias-romeiro/tr2_projeto.git](https://github.com/oseias-romeiro/tr2_projeto.git)
+
 
 ## Demonstração:
 Vídeo demonstrativo em ambiente de teste: [youtu.be/Vv9kiqzvt7s](https://youtu.be/Vv9kiqzvt7s)
 
 ## Setup 
 Para rodar o projeto, deve-se instalar os seguintes requisitos:
-  - [Arduino CLI](https://arduino.github.io/arduino-cli/0.34/installation)
-  ```sh
-    arduino-cli lib install "LoRa"
-    arduino-cli lib install "Ultrasonic"
-    arduino-cli lib install "Sleep_n0m1"
-  ```
-  - [Python](https://www.python.org/downloads/)
-  ```sh
-    pip install pyserial
-    pip install requests
-  ```
+
+- [Arduino CLI](https://arduino.github.io/arduino-cli/0.34/installation)
+
+```sh
+    arduino-cli lib install "LoRa"
+    arduino-cli lib install "Ultrasonic"
+    arduino-cli lib install "Sleep_n0m1"
+```
+- [Python](https://www.python.org/downloads/)
+```sh
+    pip install pyserial
+    pip install requests
+```
 
 ### Executando
 Utilizar os seguintes comandos no terminal:
 
 ```sh
-  arduino-cli compile --fqbn arduino:avr:uno "%~dp0\Node\Node.ino"
-  arduino-cli upload -p <porta_usb_arduino_node> --fqbn arduino:avr:uno "%~dp0\Node\Node.ino"
-  arduino-cli compile --fqbn arduino:avr:uno "%~dp0\Gateway\Gateway.ino"
-  arduino-cli upload -p <porta_usb_arduino_gateway> --fqbn arduino:avr:uno "%~dp0\Gateway\Gateway.ino"
-  start cmd /k arduino-cli monitor -p "%~dp0\Node\Node.ino"
-  python SerialListener.py
+    arduino-cli compile --fqbn arduino:avr:uno "%~dp0\Node\Node.ino"
+    arduino-cli upload -p <porta_usb_arduino_node> --fqbn arduino:avr:uno "%~dp0\Node\Node.ino"
+    arduino-cli compile --fqbn arduino:avr:uno "%~dp0\Gateway\Gateway.ino"
+    arduino-cli upload -p <porta_usb_arduino_gateway> --fqbn arduino:avr:uno "%~dp0\Gateway\Gateway.ino"
+    start cmd /k arduino-cli monitor -p "%~dp0\Node\Node.ino"
+    python SerialListener.py
 ```
 OU
 - Windows: ``` Setup.bat ```
@@ -43,12 +46,12 @@ OU
 Executando servidor Web localmente com banco de dados SQLite:
 
 ```sh
-cd ./web
-pip install -r requirements.txt
-flask db init
-flask db migrate -m "init"
-flask db upgrade
-flask run
+    cd ./web
+    pip install -r requirements.txt
+    flask db init
+    flask db migrate -m "init"
+    flask db upgrade
+    flask run
 ```
 
 > Veja o serviço hospedado em [tr2.always.net](https://tr2.alwaysdata.net/)
@@ -149,6 +152,8 @@ Uma solução é impedir que todos os *nodes* tentem estabelecer conexão ao mes
   3. Remover *nodes* inativos da rede do controle.
 
 Dessa forma, a comunicação entre o gateway e os *nodes* será mais eficiente, reduzindo interferências e garantindo que as respostas sejam recebidas corretamente.
+
+<br><br>
 
 ## Conclusões
 Apesar dos problemas abordados e das propostas de aprimoramentos em [Correções e Aprimoramentos](#correções-e-aprimoramentos), o projeto é funcional como mostrado em vídeo com o ambiente de teste que tivemos acesso, aplicando assim, na prática, os conhecimentos da disciplina na implementação de uma solução para um problema real.
