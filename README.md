@@ -59,13 +59,16 @@ Cada tanque teria um Arduino com um sensor de ultrassom acoplado que mede o nív
 Neste projeto, utilizaremos os termos *Node* para os Arduínos que coleta e envia os dados do sensor e *Gateway* para o Arduíno que faz a função de receptor central.
 
 - **_Node_**: Consiste em um Arduino Uno conectado a uma protoboard, que possui um sensor ultrassônico para medir o nível de combustível no tanque com base no tempo de reflexão das ondas, calculando o quão vazio está. Além disso, ele é conectado a um LoRa Shield para transmitir os dados coletados pelo sensor.
-  
-<img src="https://github.com/oseias-romeiro/tr2_projeto/assets/73205479/35950027-83a9-4eb5-b284-10f58f677879" width="300"/>
 
+<br>
+<img src="https://github.com/oseias-romeiro/tr2_projeto/assets/73205479/35950027-83a9-4eb5-b284-10f58f677879" width="300" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"/>
+<br>
 
 - **_Gateway_**: Consiste em um Arduino Uno conectado a um LoRa Shield para recebimento dos dados enviados por algum _Node_.
-  
-<img src="https://github.com/oseias-romeiro/tr2_projeto/assets/73205479/7fa78a23-47a7-4ef7-a647-0fe80767ec0d" width="300"/>
+
+<br>
+<img src="https://github.com/oseias-romeiro/tr2_projeto/assets/73205479/7fa78a23-47a7-4ef7-a647-0fe80767ec0d" width="300" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"/>
+<br>
 
 ### Comunicação *Gateway* e *Nodes*
 A comunicação se inicia com o *gateway* enviando um sinal de broadcast para os *nodes*. Após isso, ele aguarda 10 segundos o sinal de algum *node* enviando o seu ID. Essa tentativa de conexão é realizada 3 vezes, a fim de garantir que mesmo com algumas perdas de pacotes ou dessincronização (com um certo limite) a conexão seja concluída com sucesso. Caso contrário, infere-se que não há nenhum *node* acordado, portanto ele entra em modo de baixo consumo de energia por um determinado tempo. Caso receba sinal de algum *node*, o gateway confirma para assim estabelecer a conexão entre eles.
