@@ -38,18 +38,21 @@ OU
 - Linux: ``` chmod +x ./Setup.sh && ./Setup.sh ```
 
 ### Web Server
-Executando servidor web localmente:
+Executando servidor web localmente com banco de dados sqlite:
 
 ```sh
 cd ./web
 pip install -r requirements.txt
+flask db init
+flask db migrate -m "init"
+flask db upgrade
 flask run
 ```
 
-> Veja o serviço hospedado em [tr2.alway.net](https://tr2.alwaysdata.net/)
+> Veja o serviço hospedado em [tr2.always.net](https://tr2.alwaysdata.net/)
 
 ## Como o projeto funciona?
-Cada tanque teria um arduino com um sensor de ultrassom acoplado que mede o nível de combustível no tanque e envia o dado via LoRa (tecnologia de rádio para longo alcançe com baixa energia) para um receptor central, que deve receber o dado e encaminhar para o um serviço web que cria um dashboard com base nos dados coletados.
+Cada tanque teria um arduino com um sensor de ultrassom acoplado que mede o nível de combustível no tanque e envia o dado via **LoRa** (tecnologia de rádio para longo alcançe com baixa energia) para um **receptor central**, que deve receber o dado e encaminhar para o um serviço web que cria um dashboard com base nos dados coletados.
 
 Neste projeto, utilizaremos os termos *Node* para os arduinos que coleta e envia os dados do sensor e *Gateway* para o arduino que faz a função de receptor central.
 
@@ -69,6 +72,18 @@ Então o *node* captura os dados do sensor, faz a medição em **centímetros**,
 
 O *gateway* recebe os dados do *node*, insere em formato JSON juntamente com logs das etapas anteriores e escreve na portal serial para ser lidas pelo programa [SerialListner](./SerialListener.py), depois formatada e enviada para o servidor web.
 
+### Serviço Web
+O serviço [tr2.alwaysdata.net](https://tr2.alwaysdata.net/) recebe os dados de sensores recebidos por requisção post e salva em um banco de dados (PosgreSQL em produção de SQLite em desenvolvimento). Apartir dos dados armazenados é gerado um **dashboard** para visualizar  nível dos tanques com grafico do histórico e uma **predição** de vida útil em horas de consumo que o tanque aguenta.
+
+|Endpoint           |Método |Descrição
+|---                |---    |---
+|/                  |GET    |Lista de tanques monitorados
+|/tanque/{id}       |GET    |Dashboard do tanque
+|/tanque/{id}       |POST   |Cadastro de tanque e adição de dados de sensores
+|/tanque/{id}/edit  |GET    |Tela para edição de informações opcionais do tanque
+|/tanque/{id}/edit  |POST   |Edição de informações opcionais do tanque
+|/logs              |GET    |Registro de comunicação entre os dispositivos
+|/logs/delete       |POST   |Apaga os logs existentes
 
 ## Correções e Aprimoramentos
 
@@ -89,7 +104,16 @@ Uma solução é impedir que todos os *nodes* tentem estabelecer conexão ao mes
 Dessa forma, a comunicação entre o gateway e os *nodes* será mais eficiente, reduzindo interferências e garantindo que as respostas sejam recebidas corretamente.
 
 ## Conclusões
-Apesar dos problemas abordados e das propostas de aprimoramentos em [Correções e Aprimoramentos](#correções-e-aprimoramentos), o projeto é funcional como mostrado em [video](#demonstração) com o ambiente de teste que tivemos acesso, aplpicando assim, na prática os conhecimentos da disciplina na implementação de uma solução para um problema real.
+Apesar dos problemas abordados e das propostas de aprimoramentos em [Correções e Aprimoramentos](#correções-e-aprimoramentos), o projeto é funcional como mostrado em video com o ambiente de teste que tivemos acesso, aplicando assim, na prática os conhecimentos da disciplina na implementação de uma solução para um problema real.
+
+
+## Referências
+- [Arduino LoRa](https://github.com/sandeepmistry/arduino-LoRa)
+- [Lora Shield](https://www.dragino.com/products/lora/item/102-lora-shield.html)
+- [Ultrasonic arduino](https://github.com/Pranjal-Prabhat/ultrasonic-arduino)
+- [Arduino CLI](https://arduino.github.io/arduino-cli/1.0/)
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+
 
 ## Imagens
 
